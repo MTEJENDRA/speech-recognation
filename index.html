@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Speech Emotion Recognition – Demo Login</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <!-- Login screen -->
+      <section class="auth-screen" id="auth-screen">
+        <div class="container auth-inner">
+          <div class="auth-copy">
+            <span class="eyebrow">Secure Demo Access</span>
+            <h1>Speech Emotion Recognition Demo</h1>
+            <p class="hero-description">
+              Log in to access the conceptual SER demo where you can upload a
+              speech clip and view simulated emotion predictions.
+            </p>
+          </div>
+
+          <div class="auth-card">
+            <div class="auth-brand">
+              <span class="brand-logo">SER</span>
+              <div class="brand-text">
+                <span class="brand-title">Project Login</span>
+                <span class="brand-subtitle">Speech Emotion Recognition</span>
+              </div>
+            </div>
+
+            <form id="login-form" class="auth-form">
+              <div class="auth-field">
+                <label for="login-username">Username</label>
+                <input
+                  type="text"
+                  id="login-username"
+                  placeholder="Enter your name or ID"
+                  autocomplete="off"
+                  required
+                />
+              </div>
+              <div class="auth-field">
+                <label for="login-password">Password</label>
+                <input
+                  type="password"
+                  id="login-password"
+                  placeholder="Enter a password"
+                  required
+                />
+              </div>
+              <p class="auth-hint">
+                For this demo, any non-empty username and password will allow
+                access.
+              </p>
+              <p class="auth-error" id="login-error" aria-live="polite"></p>
+              <button type="submit" class="btn primary auth-btn">
+                Log in to continue
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script>
+      (function () {
+        var loginForm = document.getElementById("login-form");
+        var loginUsername = document.getElementById("login-username");
+        var loginPassword = document.getElementById("login-password");
+        var loginError = document.getElementById("login-error");
+
+        if (!loginForm) return;
+
+        loginForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var username =
+            (loginUsername && loginUsername.value ? loginUsername.value : "").trim();
+          var password =
+            (loginPassword && loginPassword.value ? loginPassword.value : "").trim();
+
+          if (!username || !password) {
+            if (loginError) {
+              loginError.textContent =
+                "Please enter both username and password.";
+            }
+            return;
+          }
+
+          if (loginError) {
+            loginError.textContent = "";
+          }
+
+          try {
+            sessionStorage.setItem("ser_logged_in", "true");
+          } catch (err) {}
+
+          window.location.href = "demo.html";
+        });
+      })();
+    </script>
+  </body>
+  </html>
+

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SER Demo – Speech Emotion Recognition</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar demo-topbar">
+      <div class="container topbar-inner">
+        <div class="brand">
+          <span class="brand-logo">SER</span>
+          <div class="brand-text">
+            <span class="brand-title">Speech Emotion Recognition</span>
+            <span class="brand-subtitle">Demo</span>
+          </div>
+        </div>
+        <a href="index.html" class="btn ghost logout-btn">Log out</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="section section-alt">
+        <div class="container">
+          <div class="section-header">
+            <h2>SER Demo (Conceptual)</h2>
+            <p>
+              Interact with the UI to simulate how a speech emotion recognition
+              system would behave. The current version uses a mock classifier.
+            </p>
+          </div>
+
+          <div class="demo-layout">
+            <div class="demo-left">
+              <div class="demo-card">
+                <h3>Upload Audio</h3>
+                <p class="muted">
+                  Choose a short speech clip (e.g., WAV/MP3). The UI will
+                  display a simulated emotion prediction.
+                </p>
+                <label class="file-input-label">
+                  <input
+                    type="file"
+                    id="audio-input"
+                    accept="audio/*"
+                    hidden
+                  />
+                  <span>Select Audio File</span>
+                </label>
+                <p class="file-name" id="file-name">No file selected</p>
+
+                <button class="btn primary" id="analyze-btn" disabled>
+                  Analyze Emotion
+                </button>
+
+                <p class="hint">
+                  In a full implementation, this button would send the audio to
+                  a backend that extracts MFCCs and other features, then applies
+                  a trained model.
+                </p>
+              </div>
+            </div>
+
+            <div class="demo-right">
+              <div class="demo-card">
+                <h3>Predicted Emotion</h3>
+                <div class="emotion-display" id="emotion-display">
+                  <span class="emotion-label" id="emotion-label">Neutral</span>
+                  <span class="emotion-confidence" id="emotion-confidence"
+                    >Confidence: —</span
+                  >
+                </div>
+
+                <div class="emotion-badges" id="emotion-badges"></div>
+
+                <div class="timeline">
+                  <div class="timeline-header">
+                    <span>Temporal Emotion Trend (mock)</span>
+                  </div>
+                  <div class="timeline-bars" id="timeline-bars"></div>
+                </div>
+              </div>
+
+              <div class="demo-card demo-card-secondary">
+                <h3>Research Challenges &amp; Future Directions</h3>
+                <ul class="bullet-list">
+                  <li>Real-world deployment and cross-domain generalization.</li>
+                  <li>Transfer learning to support new languages and domains.</li>
+                  <li>
+                    Multimodal integration of speech, facial expressions, and
+                    text.
+                  </li>
+                  <li>
+                    Designing low-latency, noise-robust systems for real-time
+                    use.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // Only allow access after login; otherwise redirect to login page
+      (function () {
+        try {
+          if (!sessionStorage.getItem("ser_logged_in")) {
+            window.location.replace("index.html");
+            return;
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <script src="demo.js"></script>
+  </body>
+  </html>
